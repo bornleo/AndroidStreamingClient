@@ -59,8 +59,8 @@ public class RtpMediaDecoder implements Decoder, SurfaceHolder.Callback {
     public static final String CONFIG_BUFFER_TYPE = "BUFFER_TYPE";
     public static final String CONFIG_RECEIVE_BUFFER_SIZE = "RECEIVE_BUFFER_SIZE_BYTES";
     public static final int DATA_STREAMING_PORT = 5006;
-    public static final int SURFACE_WIDTH = 640;
-    public static final int SURFACE_HEIGHT = 480;
+    public int SURFACE_WIDTH = 640;
+    public int SURFACE_HEIGHT = 480;
     public static final String TRANSPORT_PROTOCOL = "RTP";
     public static final String VIDEO_CODEC = "H.264";
 
@@ -110,7 +110,9 @@ public class RtpMediaDecoder implements Decoder, SurfaceHolder.Callback {
      *  FRAMES_WINDOW_TIME=1000: Window size in milliseconds for the time-window buffer
      *
      */
-    public RtpMediaDecoder(SurfaceView surfaceView, Properties properties) {
+    public RtpMediaDecoder(SurfaceView surfaceView, Properties properties,int width,int height) {
+         SURFACE_WIDTH = width;
+        SURFACE_HEIGHT = height;
         configuration = (properties != null) ? properties : new Properties();
 
         // Read configuration
@@ -125,6 +127,9 @@ public class RtpMediaDecoder implements Decoder, SurfaceHolder.Callback {
         surfaceView.getHolder().addCallback(this);
     }
 
+
+    
+    
     /**
      * Defines the output stream where to trace packet's data while they arrive to the decoder
      *
